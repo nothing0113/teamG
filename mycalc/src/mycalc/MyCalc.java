@@ -16,6 +16,9 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
+import javax.swing.JMenuBar;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 
 public class MyCalc extends JFrame {
    
@@ -23,6 +26,10 @@ public class MyCalc extends JFrame {
    private static final long serialVersionUID = 1L;
    private JPanel contentPane;
    private JTextField textField;
+   /**
+    * @wbp.nonvisual location=559,234
+    */
+   private AboutDialog aboutDialog;
 
    /**
     * Launch the application.
@@ -44,8 +51,39 @@ public class MyCalc extends JFrame {
     * Create the frame.
     */
    public MyCalc() {
-      setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       setBounds(100, 100, 301, 382);
+      
+      JMenuBar menuBar = new JMenuBar();
+      setJMenuBar(menuBar);
+      
+      JMenu mnNewMenu = new JMenu("Type");
+      menuBar.add(mnNewMenu);
+      
+      JMenuItem mntmNewMenuItem_2 = new JMenuItem("표준화");
+      mnNewMenu.add(mntmNewMenuItem_2);
+      
+      JMenuItem mntmNewMenuItem_3 = new JMenuItem("공학용");
+      mnNewMenu.add(mntmNewMenuItem_3);
+      
+      JMenu mnNewMenu_1 = new JMenu("Help");
+      menuBar.add(mnNewMenu_1);
+      
+      JMenuItem mntmNewMenuItem_1 = new JMenuItem("About");
+      mntmNewMenuItem_1.addActionListener(new ActionListener() {
+      	public void actionPerformed(ActionEvent e) {
+      		getAboutDialog().setVisible(true);
+      	}
+      });
+      mnNewMenu_1.add(mntmNewMenuItem_1);
+      
+      JMenuItem mntmNewMenuItem = new JMenuItem("Exit");
+      mntmNewMenuItem.addActionListener(new ActionListener() {
+      	public void actionPerformed(ActionEvent e) {
+      		System.exit(0);
+      	}
+      });
+      mnNewMenu_1.add(mntmNewMenuItem);
       contentPane = new JPanel();
       contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -281,4 +319,10 @@ public class MyCalc extends JFrame {
       panel_2.add(btnNewButton_1);
    }
 
+	public AboutDialog getAboutDialog() {
+		if(aboutDialog == null) {
+			aboutDialog = new AboutDialog();
+		}
+		return aboutDialog;
+	}
 }
