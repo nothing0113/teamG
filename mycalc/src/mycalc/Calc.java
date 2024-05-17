@@ -34,5 +34,5 @@ public class Calc {
       return result;
    }
    
-   김석윤왓다감
+   김석윤왓다감 22
 }
