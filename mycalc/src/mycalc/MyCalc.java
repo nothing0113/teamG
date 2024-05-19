@@ -169,9 +169,11 @@ public class MyCalc extends JFrame {
       JButton btnNewButton_17_2 = new JButton("x^2");
       btnNewButton_17_2.addActionListener(new ActionListener() {
       	public void actionPerformed(ActionEvent e) {
-      		double exp1 = Math.pow(chang_db.convertStringToDouble(exp),2);
-      		String exp = D2SConverter.convertD2S(exp1);
-            textField.setText(exp); //미완성
+            exp = textField.getText();
+            double value = Double.parseDouble(exp);
+            double result = Math.pow(value, 2);
+            textField.setText(String.valueOf(result));
+            exp = String.valueOf(result);
       	}
       });
       btnNewButton_17_2.setFont(new Font("굴림", Font.BOLD, 15));
@@ -330,6 +332,17 @@ public class MyCalc extends JFrame {
       panel_2.add(btnNewButton_14);
       
       JButton btnNewButton_20_3 = new JButton(".");
+      btnNewButton_20_3.addActionListener(new ActionListener() {
+      	public void actionPerformed(ActionEvent e) {
+            if(exp == "") {
+            	exp = exp + "0.";	
+            }
+            else{
+            	exp = exp + ".";
+            }
+            textField.setText(exp);
+      	}
+      });
       btnNewButton_20_3.setFont(new Font("굴림", Font.BOLD, 20));
       panel_2.add(btnNewButton_20_3);
       
@@ -338,7 +351,11 @@ public class MyCalc extends JFrame {
          public void actionPerformed(ActionEvent e) {
             String postfix = Infix2Postfix.convert(exp);
             double value = Calc.eval(postfix);
-            textField.setText(String.valueOf(value));
+            if(value == Math.floor(value)) {
+            textField.setText(String.format("%.0f", value));
+            }else {
+            	textField.setText(String.valueOf(value));
+            }
          }
       });
       btnNewButton_1.setFont(new Font("Dialog", Font.PLAIN, 20));
