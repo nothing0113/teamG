@@ -291,6 +291,28 @@ public class MyCalc extends JFrame {
       btnNewButton_18.setFont(new Font("굴림", Font.BOLD, 15));
       btnNewButton_18.addActionListener(new ActionListener() {
          public void actionPerformed(ActionEvent e) {
+            if (!exp.isEmpty()) {
+					try {
+						double num = Double.parseDouble(exp);
+						num = -num;
+						exp = String.valueOf(num);
+					} catch (NumberFormatException ex) {
+						int lastOpIndex = Math.max(exp.lastIndexOf('+'), Math.max(exp.lastIndexOf('-'), Math.max(exp.lastIndexOf('*'), exp.lastIndexOf('/'))));
+						if (lastOpIndex != -1) {
+							String lastNum = exp.substring(lastOpIndex + 1);
+							if (!lastNum.isEmpty()) {
+								double num = Double.parseDouble(lastNum);
+								num = -num;
+								exp = exp.substring(0, lastOpIndex + 1) + num;
+							}
+						} else {
+							double num = Double.parseDouble(exp);
+							num = -num;
+							exp = String.valueOf(num);
+						}
+					}
+					textField.setText(exp);
+        	 }
          }
       });
       panel_2.add(btnNewButton_18);
