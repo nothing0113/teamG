@@ -317,7 +317,7 @@ public class MyCalc2 extends JFrame {
                      num = -num;
                      exp = String.valueOf(num);
                      textField.setText(exp);
-                 } catch (NumberFormatException ex) {
+                 } catch (NumberFormatException ex) { 
                      int lastOpIndex = Math.max(Math.max(exp.lastIndexOf('+'), exp.lastIndexOf('-')), 
                                                 Math.max(exp.lastIndexOf('*'), exp.lastIndexOf('/')));
                      if (lastOpIndex != -1) {
