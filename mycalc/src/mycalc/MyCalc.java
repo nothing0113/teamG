@@ -313,7 +313,7 @@ public class MyCalc extends JFrame {
       btnNewButton_2.setFont(new Font("Dialog", Font.PLAIN, 20));
       panel_2.add(btnNewButton_2);
       
-      JButton btnNewButton_18 = new JButton("+/-");
+      JButton btnNewButton_18 = new JButton("+/-"); 
       btnNewButton_18.setFont(new Font("굴림", Font.BOLD, 15));
       btnNewButton_18.addActionListener(new ActionListener() {
          public void actionPerformed(ActionEvent e) {

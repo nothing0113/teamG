@@ -329,7 +329,7 @@ public class MyCalc2 extends JFrame {
                                  exp = exp.substring(0, lastOpIndex + 1) + "(" + num + ")";
                                  textField.setText(exp);
                              } catch (NumberFormatException ex2) {
-                             }
+                             } 
                          }
                      } else {
                          try {

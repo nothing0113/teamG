@@ -13,7 +13,7 @@ public class Infix2Postfix {
                 if (tok.equals("(")) {
                     stack.push(tok);
                     lastWasOperator = true;
-                } else if (tok.equals(")")) {
+                } else if (tok.equals(")")) { 
                     while (!stack.empty()) {
                         String op = stack.pop();
                         if (op.equals("(")) {
