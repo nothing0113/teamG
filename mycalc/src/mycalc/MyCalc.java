@@ -350,7 +350,7 @@ public class MyCalc extends JFrame {
              }
          }
      });
-         
+      
       panel_2.add(btnNewButton_18);
       
       JButton btnNewButton_14 = new JButton("0");

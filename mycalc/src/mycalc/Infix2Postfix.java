@@ -6,7 +6,7 @@ public class Infix2Postfix {
 		StringTokenizer st = new StringTokenizer(exp, "+-*/()",true);
 		Stack<String> stack = new Stack<>();
 		StringBuffer buf = new StringBuffer();
-		boolean lastWasOperator = true;
+		boolean lastWasOperator = true; 
         while (st.hasMoreTokens()) {
             String tok = st.nextToken();
             if (opType(tok) >= 0) {

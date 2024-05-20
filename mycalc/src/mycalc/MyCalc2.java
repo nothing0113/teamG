@@ -344,7 +344,6 @@ public class MyCalc2 extends JFrame {
              }
          }
      });
-      
       JButton btnNewButton_2 = new JButton("+");
       btnNewButton_2.addActionListener(new ActionListener() {
          public void actionPerformed(ActionEvent e) {
