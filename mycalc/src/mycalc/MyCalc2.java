@@ -21,7 +21,6 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
 public class MyCalc2 extends JFrame {
-   final double pie = 3.1415926535897932384626433832795;
    final double e1 = 2.7182818284590452353602874713527;
    private String exp = "";
    private static final long serialVersionUID = 1L;
@@ -126,38 +125,57 @@ public class MyCalc2 extends JFrame {
       btnNewButton_20.setFont(new Font("굴림", Font.BOLD, 16));
       btnNewButton_20.addActionListener(new ActionListener() {
       	public void actionPerformed(ActionEvent e) {
+      		 exp = textField.getText();
+             double value = Double.parseDouble(exp);
+             double result = 1/value;
+             textField.setText(String.valueOf(result));
+             exp = String.valueOf(result);
       	}
       });
       
       JButton btnNewButton_20_1_3 = new JButton("π");
       btnNewButton_20_1_3.addActionListener(new ActionListener() {
       	public void actionPerformed(ActionEvent e) {
-      		String p2 = String.valueOf(pie);
-      		String op = "+-*/()";
-      		if (exp.indexOf(op) == -1) {
-            exp = exp + p2;
+            String p2 = String.valueOf(Math.PI); // π 값을 제대로 설정
+            
+            // exp가 null인 경우 먼저 체크
+            if (exp == null) {
+                exp = p2;
+                textField.setText(exp);
+            } else {
+                // exp가 null이 아니면서 마지막 입력이 π가 아닌 경우에만 π를 추가
+                if (!exp.endsWith(p2)) {
+                    exp = exp + p2;
+                    String postfix = Infix2Postfix01.convert(exp);
+                    double value = Calc.eval(postfix);
+                    textField.setText(String.valueOf(value));
+                }
             }
-      		else {
-      			exp = p2;
-      		}
-            textField.setText(exp);
-      	}
-      });
+        }
+
+    });
       
       JButton btnNewButton_20_1_2 = new JButton("e");
       btnNewButton_20_1_2.addActionListener(new ActionListener() {
       	public void actionPerformed(ActionEvent e) {
-      		String p2 = String.valueOf(e1);
-      		String op = "+-*/()";
-      		if (exp.indexOf(op) == -1) {
-            exp = exp + p2;
-            }
-      		else {
-      			exp = p2;
-      		}
-            textField.setText(exp);
-      	}
-      });
+      	  String p2 = String.valueOf(Math.E); // π 값을 제대로 설정
+          
+          // exp가 null인 경우 먼저 체크
+          if (exp == null) {
+              exp = p2;
+              textField.setText(exp);
+          } else {
+              // exp가 null이 아니면서 마지막 입력이 π가 아닌 경우에만 π를 추가
+              if (!exp.endsWith(p2)) {
+                  exp = exp + p2;
+                  String postfix = Infix2Postfix01.convert(exp);
+                  double value = Calc.eval(postfix);
+                  textField.setText(String.valueOf(value));
+              }
+          }
+      }
+
+  });
       btnNewButton_20_1_2.setFont(new Font("굴림", Font.BOLD, 19));
       panel_2.add(btnNewButton_20_1_2);
       btnNewButton_20_1_3.setFont(new Font("굴림", Font.BOLD, 19));
@@ -197,12 +215,22 @@ public class MyCalc2 extends JFrame {
       JButton btnNewButton_20_1 = new JButton("10^(x)");
       btnNewButton_20_1.addActionListener(new ActionListener() {
       	public void actionPerformed(ActionEvent e) {
+            try {
+                exp = textField.getText();
+                if (exp == null || exp.isEmpty()) {
+                    textField.setText("Invalid input");
+                    return;
+                }
+
       		 exp = textField.getText();
              double value = Double.parseDouble(exp);
              double result = Math.pow(10, value);
              textField.setText(String.valueOf(result));
              exp = String.valueOf(result);
-      	}
+      	}catch (NumberFormatException ex) {
+            textField.setText("Invalid input");
+        }
+            }
       });
       btnNewButton_20_1.setFont(new Font("굴림", Font.BOLD, 12));
       panel_2.add(btnNewButton_20_1);
@@ -217,7 +245,7 @@ public class MyCalc2 extends JFrame {
              double result = Math.pow(value, 2);
              textField.setText(String.valueOf(result));
              exp = String.valueOf(result);
-      	}
+      		}
       });
       btnNewButton_20_1_1.setFont(new Font("굴림", Font.BOLD, 14));
       panel_2.add(btnNewButton_20_1_1);

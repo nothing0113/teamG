@@ -124,6 +124,11 @@ public class MyCalc extends JFrame {
       JButton btnNewButton_17_4 = new JButton("1/x");
       btnNewButton_17_4.addActionListener(new ActionListener() {
       	public void actionPerformed(ActionEvent e) {
+     		 exp = textField.getText();
+             double value = Double.parseDouble(exp);
+             double result = 1/value;
+             textField.setText(String.valueOf(result));
+             exp = String.valueOf(result);
       	}
       });
       btnNewButton_17_4.setFont(new Font("굴림", Font.BOLD, 15));
