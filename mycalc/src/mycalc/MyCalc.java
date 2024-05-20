@@ -119,33 +119,23 @@ public class MyCalc extends JFrame {
       
       JPanel panel_2 = new JPanel();
       contentPane.add(panel_2, BorderLayout.CENTER);
-      panel_2.setLayout(new GridLayout(0, 4, 10, 6));
+      panel_2.setLayout(new GridLayout(0, 4, 10, 5));
       
-      JButton btnNewButton_16 = new JButton("");
-      btnNewButton_16.addActionListener(new ActionListener() {
+      JButton btnNewButton_17_4 = new JButton("1/x");
+      btnNewButton_17_4.addActionListener(new ActionListener() {
+      	public void actionPerformed(ActionEvent e) {
+      	}
+      });
+      btnNewButton_17_4.setFont(new Font("굴림", Font.BOLD, 15));
+      panel_2.add(btnNewButton_17_4);
+      
+      JButton btnNewButton = new JButton("7");
+      btnNewButton.addActionListener(new ActionListener() {
          public void actionPerformed(ActionEvent e) {
+            exp = exp + "7";
+            textField.setText(exp);
          }
       });
-      btnNewButton_16.setFont(new Font("굴림", Font.BOLD, 15));
-      panel_2.add(btnNewButton_16);
-      
-      JButton btnNewButton_17 = new JButton("");
-      btnNewButton_17.addActionListener(new ActionListener() {
-         public void actionPerformed(ActionEvent e) {
-         }
-      });
-      btnNewButton_17.setFont(new Font("굴림", Font.BOLD, 15));
-      panel_2.add(btnNewButton_17);
-      
-      JButton btnNewButton_15 = new JButton("C");
-      btnNewButton_15.addActionListener(new ActionListener() {
-         public void actionPerformed(ActionEvent e) {
-            exp = "";
-            textField.setText("0");
-         }
-      });
-      btnNewButton_15.setFont(new Font("Dialog", Font.PLAIN, 15));
-      panel_2.add(btnNewButton_15);
       
       JButton btnNewButton_19 = new JButton("Del");
       btnNewButton_19.setFont(new Font("굴림", Font.PLAIN, 15));
@@ -160,28 +150,17 @@ public class MyCalc extends JFrame {
             }
          }
       });
-      panel_2.add(btnNewButton_19);
       
-      JButton btnNewButton_17_1 = new JButton("");
-      btnNewButton_17_1.setFont(new Font("굴림", Font.BOLD, 15));
-      panel_2.add(btnNewButton_17_1);
-      
-      JButton btnNewButton_17_2 = new JButton("x^2");
-      btnNewButton_17_2.addActionListener(new ActionListener() {
-      	public void actionPerformed(ActionEvent e) {
-            exp = textField.getText();
-            double value = Double.parseDouble(exp);
-            double result = Math.pow(value, 2);
-            textField.setText(String.valueOf(result));
-            exp = String.valueOf(result);
-      	}
+      JButton btnNewButton_15 = new JButton("C");
+      btnNewButton_15.addActionListener(new ActionListener() {
+         public void actionPerformed(ActionEvent e) {
+            exp = "";
+            textField.setText("0");
+         }
       });
-      btnNewButton_17_2.setFont(new Font("굴림", Font.BOLD, 15));
-      panel_2.add(btnNewButton_17_2);
-      
-      JButton btnNewButton_17_4 = new JButton("");
-      btnNewButton_17_4.setFont(new Font("굴림", Font.BOLD, 15));
-      panel_2.add(btnNewButton_17_4);
+      btnNewButton_15.setFont(new Font("Dialog", Font.PLAIN, 15));
+      panel_2.add(btnNewButton_15);
+      panel_2.add(btnNewButton_19);
       
       JButton btnNewButton_6 = new JButton("÷");
       btnNewButton_6.addActionListener(new ActionListener() {
@@ -192,14 +171,6 @@ public class MyCalc extends JFrame {
       });
       btnNewButton_6.setFont(new Font("Dialog", Font.PLAIN, 20));
       panel_2.add(btnNewButton_6);
-      
-      JButton btnNewButton = new JButton("7");
-      btnNewButton.addActionListener(new ActionListener() {
-         public void actionPerformed(ActionEvent e) {
-            exp = exp + "7";
-            textField.setText(exp);
-         }
-      });
       btnNewButton.setFont(new Font("Dialog", Font.PLAIN, 15));
       panel_2.add(btnNewButton);
       
@@ -317,8 +288,30 @@ public class MyCalc extends JFrame {
       btnNewButton_18.setFont(new Font("굴림", Font.BOLD, 15));
       btnNewButton_18.addActionListener(new ActionListener() {
          public void actionPerformed(ActionEvent e) {
-         }
-      });
+             if (!exp.isEmpty()) {
+                 try {
+                    double num = Double.parseDouble(exp);
+                    num = -num;
+                    exp = String.valueOf(num);
+                 } catch (NumberFormatException ex) {
+                    int lastOpIndex = Math.max(exp.lastIndexOf('+'), Math.max(exp.lastIndexOf('-'), Math.max(exp.lastIndexOf('*'), exp.lastIndexOf('/'))));
+                    if (lastOpIndex != -1) {
+                       String lastNum = exp.substring(lastOpIndex + 1);
+                       if (!lastNum.isEmpty()) {
+                          double num = Double.parseDouble(lastNum);
+                          num = -num;
+                          exp = exp.substring(0, lastOpIndex + 1) + num;
+                       }
+                    } else {
+                       double num = Double.parseDouble(exp);
+                       num = -num;
+                       exp = String.valueOf(num);
+                    }
+                 }
+                 textField.setText(exp);
+              }
+           }
+        });
       panel_2.add(btnNewButton_18);
       
       JButton btnNewButton_14 = new JButton("0");
@@ -349,7 +342,7 @@ public class MyCalc extends JFrame {
       JButton btnNewButton_1 = new JButton("=");
       btnNewButton_1.addActionListener(new ActionListener() {
          public void actionPerformed(ActionEvent e) {
-            String postfix = Infix2Postfix.convert(exp);
+            String postfix = Infix2Postfix01.convert(exp);
             double value = Calc.eval(postfix);
             if(value == Math.floor(value)) {
             textField.setText(String.format("%.0f", value));

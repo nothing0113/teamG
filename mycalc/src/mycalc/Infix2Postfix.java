@@ -81,5 +81,6 @@ public class Infix2Postfix {
    
    public static void main(String[] args) {
       System.out.println(convert("((3*2)+((3+4)*(2*3))*2)"));
+      
    }
 }
