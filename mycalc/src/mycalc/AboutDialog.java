@@ -40,7 +40,7 @@ public class AboutDialog extends JDialog {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(new BorderLayout(0, 0));
 		{
-			JLabel lblNewLabel = new JLabel("<html><center><h3>작성자</h3><h1>홍길동</h1></center></html>");
+			JLabel lblNewLabel = new JLabel("<html><center><h3>작성자</h3><h1>203616박성완<br>213603김정현<br>233617양우석<br></h1></center></html>");
 			lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 			contentPanel.add(lblNewLabel, BorderLayout.CENTER);
 		}

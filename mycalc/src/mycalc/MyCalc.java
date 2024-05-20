@@ -1,4 +1,3 @@
-
 package mycalc;
 import java.awt.EventQueue;
 

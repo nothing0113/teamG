@@ -209,8 +209,15 @@ public class MyCalc2 extends JFrame {
       JButton btnNewButton_20_1_4 = new JButton("√");
       btnNewButton_20_1_4.addActionListener(new ActionListener() {
       	public void actionPerformed(ActionEvent e) {
-      	}
-      });
+                  exp = textField.getText();
+                  double value = Double.parseDouble(exp);
+                  double result = Math.sqrt(value);
+                  textField.setText(String.valueOf(result));
+                  exp = String.valueOf(result);
+            }
+      	});
+
+
       
       JButton btnNewButton_20_1 = new JButton("10^(x)");
       btnNewButton_20_1.addActionListener(new ActionListener() {
@@ -283,8 +290,13 @@ public class MyCalc2 extends JFrame {
       btnNewButton_20_2.setFont(new Font("굴림", Font.BOLD, 18));
       btnNewButton_20_2.addActionListener(new ActionListener() {
       	public void actionPerformed(ActionEvent e) {
-      	}
-      });
+              exp = textField.getText();
+              int value = Integer.parseInt(exp);
+              int result = Calc.factorial(value);
+              textField.setText(String.valueOf(result));
+              exp = String.valueOf(result);  
+           }
+        });
       panel_2.add(btnNewButton_20_2);
       
       JButton btnNewButton_10 = new JButton("X");
